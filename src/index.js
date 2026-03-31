@@ -8,5 +8,5 @@ export default {
 	component: InterfaceComponent,
 	group: 'standard',
 	options: null,
-	types: ['text', 'string'],
+	types: ['string'],
 };

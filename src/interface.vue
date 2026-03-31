@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { inject, ref, watch } from "vue";
+import { inject, ref, watch, onMounted, onUnmounted } from "vue";
 import Editor from "@tinymce/tinymce-vue";
 
 export default {
@@ -28,6 +28,28 @@ export default {
 	setup(props, { emit }) {
 		const api = inject("api");
 		const internalValue = ref(props.value || "");
+
+		const closeTinyMcePopups = (e) => {
+			if (e.__tinymceFixed) return;
+			const target = e.target;
+			if (!target.closest?.(".tox-tinymce") && !target.closest?.(".tox-tinymce-aux")) {
+				const event = new MouseEvent("mousedown", {
+					bubbles: true,
+					cancelable: true,
+					view: window,
+				});
+				event.__tinymceFixed = true;
+				document.dispatchEvent(event);
+			}
+		};
+
+		onMounted(() => {
+			document.addEventListener("mousedown", closeTinyMcePopups, true);
+		});
+
+		onUnmounted(() => {
+			document.removeEventListener("mousedown", closeTinyMcePopups, true);
+		});
 
 		watch(internalValue, (newVal) => {
 			emit("input", newVal);
