@@ -55,7 +55,10 @@ export default {
 		const closeTinyMcePopups = (e) => {
 			if (e.__tinymceFixed) return;
 			const target = e.target;
-			if (!target.closest?.(".tox-tinymce") && !target.closest?.(".tox-tinymce-aux")) {
+			if (
+				!target.closest?.(".tox-tinymce") &&
+				!target.closest?.(".tox-tinymce-aux")
+			) {
 				const event = new MouseEvent("mousedown", {
 					bubbles: true,
 					cancelable: true,
@@ -167,6 +170,7 @@ export default {
 		};
 
 		const editorConfig = {
+			license_key: "gpl",
 			height: 600,
 			menubar: false,
 			skin: false,
@@ -266,7 +270,6 @@ export default {
 			branding: false,
 			promotion: false,
 			setup: (editor) => {
-				// Register a custom button for multiple image upload
 				editor.ui.registry.addButton("multi_image", {
 					icon: "image",
 					tooltip: "Upload Multiple Images",
@@ -283,10 +286,7 @@ export default {
 					},
 				});
 
-				editor.on("drop", (e) => {
-					// Native TinyMCE handles image drops inside the editor.
-					// Our wrapper handleDrop handles drops on the border/empty space.
-				});
+				editor.on("drop", (e) => {});
 			},
 		};
 
