@@ -1,18 +1,20 @@
 # Bolt Rich Text Editor (Bolt RTE)
 
-A professional, feature-rich TinyMCE interface extension for Directus with advanced file handling capabilities.
+A professional, feature-rich Tiptap interface extension for Directus with advanced file handling and customizable toolbar.
 
 ## 🚀 Features
 
-- **Seamless TinyMCE Integration**: A powerful, reliable, and user-friendly rich text editor.
-- **Multi-file Upload Button**: A dedicated toolbar button to select and upload multiple images at once.
-- **Multi-file Drag & Drop**: Effortlessly upload multiple images or files by dragging them directly into the editor or the editor container.
-- **Directus API Integration**: Automatically uploads files to the Directus `/files` endpoint and inserts them into your content.
+- **Seamless Tiptap Integration**: A modern, reliable, and highly customizable rich text editor.
+- **Multi-file Upload Button**: A toolbar button to select and upload multiple images or files at once.
+- **Multi-file Drag & Drop**: Effortlessly upload multiple images or files by dragging them directly into the editor.
+- **Directus API Integration**: Automatically handles file uploads to your Directus `/files` endpoint and inserts them into your content.
 - **Smart Content Handling**:
-  - **Images**: Automatically inserted as `<img>` tags.
+  - **Images**: Automatically inserted as `<img>` tags with responsive styles.
   - **Other Files**: Automatically inserted as download links.
-- **Clipboard Support**: Paste images directly from your clipboard.
-- **Customizable**: Built using TinyMCE 6, allowing for extensive plugin and toolbar customization.
+- **Clipboard Support**: Paste images directly from your clipboard for instant upload.
+- **Configurable Features**: Toggle toolbar features (headings, alignment, lists, tables, etc.) via the Directus interface settings.
+- **Custom Fonts**: Choose your preferred font family directly from the interface settings.
+- **Fullscreen Mode**: Expand the editor for a distraction-free writing experience.
 
 ## 🛠️ Installation
 
@@ -50,19 +52,16 @@ npm run link
 
 1.  Log in to your Directus Admin Panel.
 2.  Navigate to **Settings** > **Data Model**.
-3.  Select a collection and a `Text` or `String` field.
-4.  Change the **Interface** to **Bolt Rich Text Editor**.
+3.  Select a collection and a `Text` or `CSV` field. (Works best with `Text`).
+4.  Change the **Interface** to **Bolt RTE**.
 5.  Save the changes.
 
 ## ⚙️ Configuration
 
-The editor is pre-configured with a comprehensive set of plugins, including:
+You can customize the toolbar and the default editor font directly within the Directus field settings under **Interface Options**:
 
-- `advlist`, `autolink`, `lists`, `link`, `image`, `charmap`, `preview`
-- `anchor`, `searchreplace`, `visualblocks`, `code`, `fullscreen`
-- `insertdatetime`, `media`, `table`, `help`, `wordcount`
-
-You can modify the `editorConfig` in `src/interface.vue` to further customize the toolbar and plugins to suit your needs.
+- **Toolbar Features**: Enable or disable specific buttons (e.g., Bold, Italic, Tables, Image Upload, etc.).
+- **Editor Font Family**: Choose from common fonts like Inter, Roboto, or standard Serif/Monospace fonts.
 
 ## 📄 License
 
