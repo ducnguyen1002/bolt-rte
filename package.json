@@ -2,7 +2,7 @@
 	"name": "bolt-rte",
 	"description": "Professional Rich Text Editor for Directus with Multi-file Drag & Drop support",
 	"icon": "edit_note",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"keywords": [
 		"directus",
 		"directus-extension",
