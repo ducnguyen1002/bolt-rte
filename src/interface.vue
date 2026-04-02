@@ -18,7 +18,7 @@
 						class="toolbar-btn"
 						title="Undo"
 						@click="editor.chain().focus().undo().run()"
-						:disabled="!editor.can().undo()"
+						:disabled="isSourceView || !editor.can().undo()"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -30,7 +30,7 @@
 						class="toolbar-btn"
 						title="Redo"
 						@click="editor.chain().focus().redo().run()"
-						:disabled="!editor.can().redo()"
+						:disabled="isSourceView || !editor.can().redo()"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -49,6 +49,7 @@
 						class="toolbar-select"
 						@change="setHeading($event)"
 						title="Paragraph style"
+						:disabled="isSourceView"
 					>
 						<option
 							value="paragraph"
@@ -113,6 +114,7 @@
 						:class="{ active: editor.isActive('bold') }"
 						title="Bold"
 						@click="editor.chain().focus().toggleBold().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -126,6 +128,7 @@
 						:class="{ active: editor.isActive('italic') }"
 						title="Italic"
 						@click="editor.chain().focus().toggleItalic().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z" />
@@ -137,6 +140,7 @@
 						:class="{ active: editor.isActive('underline') }"
 						title="Underline"
 						@click="editor.chain().focus().toggleUnderline().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -150,6 +154,7 @@
 						:class="{ active: editor.isActive('strike') }"
 						title="Strikethrough"
 						@click="editor.chain().focus().toggleStrike().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -165,6 +170,7 @@
 							v-model="textColor"
 							@input="setTextColor(textColor)"
 							title="Text Color"
+							:disabled="isSourceView"
 						/>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -184,6 +190,7 @@
 							v-model="cellColor"
 							@input="setCellColor(cellColor)"
 							title="Cell Background Color"
+							:disabled="isSourceView"
 						/>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -207,6 +214,7 @@
 						:class="{ active: editor.isActive({ textAlign: 'left' }) }"
 						title="Align Left"
 						@click="editor.chain().focus().setTextAlign('left').run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -219,6 +227,7 @@
 						:class="{ active: editor.isActive({ textAlign: 'center' }) }"
 						title="Align Center"
 						@click="editor.chain().focus().setTextAlign('center').run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -231,6 +240,7 @@
 						:class="{ active: editor.isActive({ textAlign: 'right' }) }"
 						title="Align Right"
 						@click="editor.chain().focus().setTextAlign('right').run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -258,6 +268,7 @@
 						:class="{ active: editor.isActive('bulletList') }"
 						title="Bullet List"
 						@click="editor.chain().focus().toggleBulletList().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -271,6 +282,7 @@
 						:class="{ active: editor.isActive('orderedList') }"
 						title="Ordered List"
 						@click="editor.chain().focus().toggleOrderedList().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -284,6 +296,7 @@
 						:class="{ active: editor.isActive('blockquote') }"
 						title="Blockquote"
 						@click="editor.chain().focus().toggleBlockquote().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
@@ -295,6 +308,7 @@
 						:class="{ active: editor.isActive('codeBlock') }"
 						title="Code Block"
 						@click="editor.chain().focus().toggleCodeBlock().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -314,6 +328,7 @@
 						:class="{ active: editor.isActive('link') }"
 						title="Insert Link"
 						@click="insertLink"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -325,7 +340,7 @@
 						class="toolbar-btn"
 						title="Remove Link"
 						@click="editor.chain().focus().unsetLink().run()"
-						:disabled="!editor.isActive('link')"
+						:disabled="isSourceView || !editor.isActive('link')"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -352,6 +367,7 @@
 						class="toolbar-btn"
 						title="Upload Image(s)"
 						@click="triggerImageUpload"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -364,6 +380,7 @@
 						class="toolbar-btn"
 						title="Upload Video"
 						@click="triggerVideoUpload"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -376,6 +393,7 @@
 						class="toolbar-btn"
 						title="Embed Video"
 						@click="insertVideoEmbed"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -388,6 +406,7 @@
 						class="toolbar-btn"
 						title="Insert Table"
 						@click="insertTable"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -400,6 +419,7 @@
 						class="toolbar-btn"
 						title="Horizontal Rule"
 						@click="editor.chain().focus().setHorizontalRule().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z" /></svg>
 					</button>
@@ -414,6 +434,7 @@
 						class="toolbar-btn"
 						title="Add Row Above"
 						@click="editor.chain().focus().addRowBefore().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -427,6 +448,7 @@
 						class="toolbar-btn"
 						title="Add Row Below"
 						@click="editor.chain().focus().addRowAfter().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -440,6 +462,7 @@
 						class="toolbar-btn"
 						title="Add Column Before"
 						@click="editor.chain().focus().addColumnBefore().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -453,6 +476,7 @@
 						class="toolbar-btn"
 						title="Add Column After"
 						@click="editor.chain().focus().addColumnAfter().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -466,6 +490,7 @@
 						class="toolbar-btn"
 						title="Delete Row"
 						@click="editor.chain().focus().deleteRow().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path d="M7 11V13H17V11H7Z" />
@@ -476,6 +501,7 @@
 						class="toolbar-btn"
 						title="Delete Column"
 						@click="editor.chain().focus().deleteColumn().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -489,6 +515,7 @@
 						class="toolbar-btn"
 						title="Merge/Split Cells"
 						@click="editor.chain().focus().mergeOrSplit().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -500,6 +527,7 @@
 						class="toolbar-btn"
 						title="Delete Table"
 						@click="editor.chain().focus().deleteTable().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -518,6 +546,7 @@
 						class="toolbar-btn"
 						title="Clear Formatting"
 						@click="editor.chain().focus().clearNodes().unsetAllMarks().run()"
+						:disabled="isSourceView"
 					>
 						<svg viewBox="0 0 24 24">
 							<path
@@ -529,6 +558,25 @@
 			</template>
 
 			<div class="toolbar-spacer"></div>
+
+			<!-- Source Code -->
+			<template v-if="hasFeature('source')">
+				<div class="toolbar-group">
+					<button
+						class="toolbar-btn"
+						:class="{ active: isSourceView }"
+						title="Source Code"
+						@click="toggleSourceView"
+					>
+						<svg viewBox="0 0 24 24">
+							<path
+								d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
+							/>
+						</svg>
+					</button>
+				</div>
+				<div class="toolbar-divider"></div>
+			</template>
 
 			<!-- Fullscreen -->
 			<template v-if="hasFeature('fullscreen')">
@@ -562,9 +610,17 @@
 		<!-- Editor Content -->
 		<div class="bolt-rte-editor-area">
 			<editor-content
+				v-if="!isSourceView"
 				:editor="editor"
 				class="bolt-rte-content"
 			/>
+			<textarea
+				v-else
+				v-model="htmlSource"
+				class="bolt-rte-source-editor"
+				@input="updateFromSource"
+				spellcheck="false"
+			></textarea>
 		</div>
 
 		<!-- Hidden file input -->
@@ -872,6 +928,8 @@ export default {
 	setup(props, { emit }) {
 		const api = inject("api");
 		const isFocused = ref(false);
+		const isSourceView = ref(false);
+		const htmlSource = ref("");
 
 		// Trả về true nếu feature được bật (hoặc toolbar chưa cấu hình)
 		const hasFeature = (key) => {
@@ -1129,6 +1187,21 @@ export default {
 			isFullscreen.value = !isFullscreen.value;
 		};
 
+		const toggleSourceView = () => {
+			if (isSourceView.value) {
+				editor.value.commands.setContent(htmlSource.value, true);
+				isSourceView.value = false;
+			} else {
+				htmlSource.value = editor.value.getHTML();
+				isSourceView.value = true;
+			}
+		};
+
+		const updateFromSource = (e) => {
+			htmlSource.value = e.target.value;
+			emit("input", htmlSource.value);
+		};
+
 		return {
 			editor,
 			isFocused,
@@ -1164,6 +1237,10 @@ export default {
 			cellColor,
 			setTextColor,
 			setCellColor,
+			isSourceView,
+			htmlSource,
+			toggleSourceView,
+			updateFromSource,
 		};
 	},
 };
@@ -1322,6 +1399,23 @@ export default {
 	overflow-y: auto;
 	padding: 12px;
 	min-height: 200px;
+	display: flex;
+	flex-direction: column;
+}
+
+.bolt-rte-source-editor {
+	flex: 1;
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	background: transparent;
+	color: inherit;
+	font-family: var(--theme--fonts--monospace--font-family, var(--font-mono));
+	font-size: 14px;
+	padding: 0;
+	resize: none;
+	line-height: 1.5;
 }
 
 .bolt-rte-wrapper.is-fullscreen .bolt-rte-editor-area {

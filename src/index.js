@@ -6,8 +6,8 @@ const ALL_FEATURES = [
 	'align',
 	'bulletList', 'orderedList', 'blockquote', 'codeBlock',
 	'link',
-	'image', 'table', 'hr',
-	'clearFormat', 'fullscreen',
+	'image', 'video', 'table', 'hr',
+	'clearFormat', 'source', 'fullscreen',
 ];
 
 export default {
@@ -41,9 +41,11 @@ export default {
 						{ text: 'Code Block', value: 'codeBlock' },
 						{ text: 'Link', value: 'link' },
 						{ text: 'Image Upload', value: 'image' },
+						{ text: 'Video (Upload & Embed)', value: 'video' },
 						{ text: 'Table', value: 'table' },
 						{ text: 'Horizontal Rule', value: 'hr' },
 						{ text: 'Clear Formatting', value: 'clearFormat' },
+						{ text: 'Source Code (HTML)', value: 'source' },
 						{ text: 'Fullscreen', value: 'fullscreen' },
 					],
 				},
