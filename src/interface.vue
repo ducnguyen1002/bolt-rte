@@ -7,10 +7,7 @@
 		@drop.prevent="handleDrop"
 	>
 		<!-- Toolbar -->
-		<div
-			v-if="editor"
-			class="bolt-rte-toolbar"
-		>
+		<div v-if="editor" class="bolt-rte-toolbar">
 			<!-- History -->
 			<template v-if="hasFeature('history')">
 				<div class="toolbar-group">
@@ -20,11 +17,7 @@
 						@click="editor.chain().focus().undo().run()"
 						:disabled="!editor.can().undo()"
 					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"
-							/>
-						</svg>
+						<svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
 					</button>
 					<button
 						class="toolbar-btn"
@@ -32,11 +25,7 @@
 						@click="editor.chain().focus().redo().run()"
 						:disabled="!editor.can().redo()"
 					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z"
-							/>
-						</svg>
+						<svg viewBox="0 0 24 24"><path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z"/></svg>
 					</button>
 				</div>
 				<div class="toolbar-divider"></div>
@@ -45,117 +34,33 @@
 			<!-- Headings -->
 			<template v-if="hasFeature('headings')">
 				<div class="toolbar-group">
-					<select
-						class="toolbar-select"
-						@change="setHeading($event)"
-						title="Paragraph style"
-					>
-						<option
-							value="paragraph"
-							:selected="editor.isActive('paragraph')"
-						>
-							Paragraph
-						</option>
-						<option
-							value="1"
-							:selected="editor.isActive('heading', { level: 1 })"
-						>
-							Heading 1
-						</option>
-						<option
-							value="2"
-							:selected="editor.isActive('heading', { level: 2 })"
-						>
-							Heading 2
-						</option>
-						<option
-							value="3"
-							:selected="editor.isActive('heading', { level: 3 })"
-						>
-							Heading 3
-						</option>
-						<option
-							value="4"
-							:selected="editor.isActive('heading', { level: 4 })"
-						>
-							Heading 4
-						</option>
-						<option
-							value="5"
-							:selected="editor.isActive('heading', { level: 5 })"
-						>
-							Heading 5
-						</option>
-						<option
-							value="6"
-							:selected="editor.isActive('heading', { level: 6 })"
-						>
-							Heading 6
-						</option>
+					<select class="toolbar-select" @change="setHeading($event)" title="Paragraph style">
+						<option value="paragraph" :selected="editor.isActive('paragraph')">Paragraph</option>
+						<option value="1" :selected="editor.isActive('heading', { level: 1 })">Heading 1</option>
+						<option value="2" :selected="editor.isActive('heading', { level: 2 })">Heading 2</option>
+						<option value="3" :selected="editor.isActive('heading', { level: 3 })">Heading 3</option>
+						<option value="4" :selected="editor.isActive('heading', { level: 4 })">Heading 4</option>
+						<option value="5" :selected="editor.isActive('heading', { level: 5 })">Heading 5</option>
+						<option value="6" :selected="editor.isActive('heading', { level: 6 })">Heading 6</option>
 					</select>
 				</div>
 				<div class="toolbar-divider"></div>
 			</template>
 
 			<!-- Basic Marks -->
-			<template
-				v-if="
-					hasFeature('bold') ||
-					hasFeature('italic') ||
-					hasFeature('underline') ||
-					hasFeature('strike')
-				"
-			>
+			<template v-if="hasFeature('bold') || hasFeature('italic') || hasFeature('underline') || hasFeature('strike')">
 				<div class="toolbar-group">
-					<button
-						v-if="hasFeature('bold')"
-						class="toolbar-btn"
-						:class="{ active: editor.isActive('bold') }"
-						title="Bold"
-						@click="editor.chain().focus().toggleBold().run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"
-							/>
-						</svg>
+					<button v-if="hasFeature('bold')" class="toolbar-btn" :class="{ active: editor.isActive('bold') }" title="Bold" @click="editor.chain().focus().toggleBold().run()">
+						<svg viewBox="0 0 24 24"><path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>
 					</button>
-					<button
-						v-if="hasFeature('italic')"
-						class="toolbar-btn"
-						:class="{ active: editor.isActive('italic') }"
-						title="Italic"
-						@click="editor.chain().focus().toggleItalic().run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z" />
-						</svg>
+					<button v-if="hasFeature('italic')" class="toolbar-btn" :class="{ active: editor.isActive('italic') }" title="Italic" @click="editor.chain().focus().toggleItalic().run()">
+						<svg viewBox="0 0 24 24"><path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z"/></svg>
 					</button>
-					<button
-						v-if="hasFeature('underline')"
-						class="toolbar-btn"
-						:class="{ active: editor.isActive('underline') }"
-						title="Underline"
-						@click="editor.chain().focus().toggleUnderline().run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z"
-							/>
-						</svg>
+					<button v-if="hasFeature('underline')" class="toolbar-btn" :class="{ active: editor.isActive('underline') }" title="Underline" @click="editor.chain().focus().toggleUnderline().run()">
+						<svg viewBox="0 0 24 24"><path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z"/></svg>
 					</button>
-					<button
-						v-if="hasFeature('strike')"
-						class="toolbar-btn"
-						:class="{ active: editor.isActive('strike') }"
-						title="Strikethrough"
-						@click="editor.chain().focus().toggleStrike().run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M10 19h4v-3h-4v3zM5 4v3h5v3h4V7h5V4H5zM3 14h18v-2H3v2z"
-							/>
-						</svg>
+					<button v-if="hasFeature('strike')" class="toolbar-btn" :class="{ active: editor.isActive('strike') }" title="Strikethrough" @click="editor.chain().focus().toggleStrike().run()">
+						<svg viewBox="0 0 24 24"><path d="M10 19h4v-3h-4v3zM5 4v3h5v3h4V7h5V4H5zM3 14h18v-2H3v2z"/></svg>
 					</button>
 				</div>
 				<div class="toolbar-divider"></div>
@@ -164,105 +69,33 @@
 			<!-- Align -->
 			<template v-if="hasFeature('align')">
 				<div class="toolbar-group">
-					<button
-						class="toolbar-btn"
-						:class="{ active: editor.isActive({ textAlign: 'left' }) }"
-						title="Align Left"
-						@click="editor.chain().focus().setTextAlign('left').run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"
-							/>
-						</svg>
+					<button class="toolbar-btn" :class="{ active: editor.isActive({ textAlign: 'left' }) }" title="Align Left" @click="editor.chain().focus().setTextAlign('left').run()">
+						<svg viewBox="0 0 24 24"><path d="M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"/></svg>
 					</button>
-					<button
-						class="toolbar-btn"
-						:class="{ active: editor.isActive({ textAlign: 'center' }) }"
-						title="Align Center"
-						@click="editor.chain().focus().setTextAlign('center').run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M7 15v2h10v-2H7zm-4 6h18v-2H3v2zm0-8h18v-2H3v2zm4-6v2h10V7H7zM3 3v2h18V3H3z"
-							/>
-						</svg>
+					<button class="toolbar-btn" :class="{ active: editor.isActive({ textAlign: 'center' }) }" title="Align Center" @click="editor.chain().focus().setTextAlign('center').run()">
+						<svg viewBox="0 0 24 24"><path d="M7 15v2h10v-2H7zm-4 6h18v-2H3v2zm0-8h18v-2H3v2zm4-6v2h10V7H7zM3 3v2h18V3H3z"/></svg>
 					</button>
-					<button
-						class="toolbar-btn"
-						:class="{ active: editor.isActive({ textAlign: 'right' }) }"
-						title="Align Right"
-						@click="editor.chain().focus().setTextAlign('right').run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M3 21h18v-2H3v2zm6-4h12v-2H9v2zm-6-4h18v-2H3v2zm6-4h12V7H9v2zM3 3v2h18V3H3z"
-							/>
-						</svg>
+					<button class="toolbar-btn" :class="{ active: editor.isActive({ textAlign: 'right' }) }" title="Align Right" @click="editor.chain().focus().setTextAlign('right').run()">
+						<svg viewBox="0 0 24 24"><path d="M3 21h18v-2H3v2zm6-4h12v-2H9v2zm-6-4h18v-2H3v2zm6-4h12V7H9v2zM3 3v2h18V3H3z"/></svg>
 					</button>
 				</div>
 				<div class="toolbar-divider"></div>
 			</template>
 
 			<!-- Lists & Blocks -->
-			<template
-				v-if="
-					hasFeature('bulletList') ||
-					hasFeature('orderedList') ||
-					hasFeature('blockquote') ||
-					hasFeature('codeBlock')
-				"
-			>
+			<template v-if="hasFeature('bulletList') || hasFeature('orderedList') || hasFeature('blockquote') || hasFeature('codeBlock')">
 				<div class="toolbar-group">
-					<button
-						v-if="hasFeature('bulletList')"
-						class="toolbar-btn"
-						:class="{ active: editor.isActive('bulletList') }"
-						title="Bullet List"
-						@click="editor.chain().focus().toggleBulletList().run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"
-							/>
-						</svg>
+					<button v-if="hasFeature('bulletList')" class="toolbar-btn" :class="{ active: editor.isActive('bulletList') }" title="Bullet List" @click="editor.chain().focus().toggleBulletList().run()">
+						<svg viewBox="0 0 24 24"><path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"/></svg>
 					</button>
-					<button
-						v-if="hasFeature('orderedList')"
-						class="toolbar-btn"
-						:class="{ active: editor.isActive('orderedList') }"
-						title="Ordered List"
-						@click="editor.chain().focus().toggleOrderedList().run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"
-							/>
-						</svg>
+					<button v-if="hasFeature('orderedList')" class="toolbar-btn" :class="{ active: editor.isActive('orderedList') }" title="Ordered List" @click="editor.chain().focus().toggleOrderedList().run()">
+						<svg viewBox="0 0 24 24"><path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"/></svg>
 					</button>
-					<button
-						v-if="hasFeature('blockquote')"
-						class="toolbar-btn"
-						:class="{ active: editor.isActive('blockquote') }"
-						title="Blockquote"
-						@click="editor.chain().focus().toggleBlockquote().run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
-						</svg>
+					<button v-if="hasFeature('blockquote')" class="toolbar-btn" :class="{ active: editor.isActive('blockquote') }" title="Blockquote" @click="editor.chain().focus().toggleBlockquote().run()">
+						<svg viewBox="0 0 24 24"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
 					</button>
-					<button
-						v-if="hasFeature('codeBlock')"
-						class="toolbar-btn"
-						:class="{ active: editor.isActive('codeBlock') }"
-						title="Code Block"
-						@click="editor.chain().focus().toggleCodeBlock().run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
-							/>
-						</svg>
+					<button v-if="hasFeature('codeBlock')" class="toolbar-btn" :class="{ active: editor.isActive('codeBlock') }" title="Code Block" @click="editor.chain().focus().toggleCodeBlock().run()">
+						<svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
 					</button>
 				</div>
 				<div class="toolbar-divider"></div>
@@ -271,70 +104,33 @@
 			<!-- Link -->
 			<template v-if="hasFeature('link')">
 				<div class="toolbar-group">
-					<button
-						class="toolbar-btn"
-						:class="{ active: editor.isActive('link') }"
-						title="Insert Link"
-						@click="insertLink"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"
-							/>
-						</svg>
+					<button class="toolbar-btn" :class="{ active: editor.isActive('link') }" title="Insert Link" @click="insertLink">
+						<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
 					</button>
-					<button
-						class="toolbar-btn"
-						title="Remove Link"
-						@click="editor.chain().focus().unsetLink().run()"
-						:disabled="!editor.isActive('link')"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M17 7h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1 0 1.43-.98 2.63-2.31 2.98l1.46 1.46C20.62 15.74 22 14.04 22 12c0-2.76-2.24-5-5-5zm-1 4h-2.19l2 2H16v-2zM2 4.27l3.11 3.11C3.29 8.12 2 9.91 2 12c0 2.76 2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1 0-1.59 1.21-2.9 2.76-3.07L8.73 11H8v2h2.73l2 2H8v1.9h4.46l3.27 3.27 1.27-1.27L3.27 3 2 4.27z"
-							/>
-						</svg>
+					<button class="toolbar-btn" title="Remove Link" @click="editor.chain().focus().unsetLink().run()" :disabled="!editor.isActive('link')">
+						<svg viewBox="0 0 24 24"><path d="M17 7h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1 0 1.43-.98 2.63-2.31 2.98l1.46 1.46C20.62 15.74 22 14.04 22 12c0-2.76-2.24-5-5-5zm-1 4h-2.19l2 2H16v-2zM2 4.27l3.11 3.11C3.29 8.12 2 9.91 2 12c0 2.76 2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1 0-1.59 1.21-2.9 2.76-3.07L8.73 11H8v2h2.73l2 2H8v1.9h4.46l3.27 3.27 1.27-1.27L3.27 3 2 4.27z"/></svg>
 					</button>
 				</div>
 				<div class="toolbar-divider"></div>
 			</template>
 
 			<!-- Media & Layout -->
-			<template
-				v-if="hasFeature('image') || hasFeature('table') || hasFeature('hr')"
-			>
+			<template v-if="hasFeature('image') || hasFeature('video') || hasFeature('table') || hasFeature('hr')">
 				<div class="toolbar-group">
-					<button
-						v-if="hasFeature('image')"
-						class="toolbar-btn"
-						title="Upload Image(s)"
-						@click="triggerImageUpload"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
-							/>
-						</svg>
+					<button v-if="hasFeature('image')" class="toolbar-btn" title="Upload Image(s)" @click="triggerImageUpload">
+						<svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
 					</button>
-					<button
-						v-if="hasFeature('table')"
-						class="toolbar-btn"
-						title="Insert Table"
-						@click="insertTable"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z"
-							/>
-						</svg>
+					<button v-if="hasFeature('video')" class="toolbar-btn" title="Upload Video" @click="triggerVideoUpload">
+						<svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13H6V11H14V13Z"/></svg>
 					</button>
-					<button
-						v-if="hasFeature('hr')"
-						class="toolbar-btn"
-						title="Horizontal Rule"
-						@click="editor.chain().focus().setHorizontalRule().run()"
-					>
-						<svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z" /></svg>
+					<button v-if="hasFeature('video')" class="toolbar-btn" title="Embed Video" @click="insertVideoEmbed">
+						<svg viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 .6-.03 1.29-.1 2.09-.06.8-.15 1.43-.28 1.9-.13.47-.35.83-.65 1.07-.3.26-.74.43-1.32.53-.58.1-1.33.17-2.22.21-.89.04-1.84.07-2.85.07L12 18c-1.01 0-1.96-.03-2.85-.07-.89-.04-1.64-.11-2.22-.21-.58-.1-1.02-.27-1.32-.53-.3-.24-.52-.6-.65-1.07-.13-.47-.22-1.1-.28-1.9C4.61 13.41 4.58 12.72 4.58 12.12L4.58 12c0-.6.03-1.29.1-2.09.06-.8.15-1.43.28-1.9.13-.47.35-.83.65-1.07.3-.26.74-.43 1.32-.53.58-.1 1.33-.17 2.22-.21.89-.04 1.84-.07 2.85-.07L12 6c1.01 0 1.96.03 2.85.07.89.04 1.64.11 2.22.21.58.1 1.02.27 1.32.53.3.24.52.6.65 1.07z"/></svg>
+					</button>
+					<button v-if="hasFeature('table')" class="toolbar-btn" title="Insert Table" @click="insertTable">
+						<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z"/></svg>
+					</button>
+					<button v-if="hasFeature('hr')" class="toolbar-btn" title="Horizontal Rule" @click="editor.chain().focus().setHorizontalRule().run()">
+						<svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"/></svg>
 					</button>
 				</div>
 				<div class="toolbar-divider"></div>
@@ -343,16 +139,8 @@
 			<!-- Clear -->
 			<template v-if="hasFeature('clearFormat')">
 				<div class="toolbar-group">
-					<button
-						class="toolbar-btn"
-						title="Clear Formatting"
-						@click="editor.chain().focus().clearNodes().unsetAllMarks().run()"
-					>
-						<svg viewBox="0 0 24 24">
-							<path
-								d="M3.27 5L2 6.27l6.97 6.97L6.5 19h3l1.57-3.75L15.73 21 17 19.73 3.27 5zM6 5v.18L8.82 8h2.4l-.72 1.73 2.1 2.1L14.21 8H20V5H6z"
-							/>
-						</svg>
+					<button class="toolbar-btn" title="Clear Formatting" @click="editor.chain().focus().clearNodes().unsetAllMarks().run()">
+						<svg viewBox="0 0 24 24"><path d="M3.27 5L2 6.27l6.97 6.97L6.5 19h3l1.57-3.75L15.73 21 17 19.73 3.27 5zM6 5v.18L8.82 8h2.4l-.72 1.73 2.1 2.1L14.21 8H20V5H6z"/></svg>
 					</button>
 				</div>
 			</template>
@@ -362,27 +150,9 @@
 			<!-- Fullscreen -->
 			<template v-if="hasFeature('fullscreen')">
 				<div class="toolbar-group">
-					<button
-						class="toolbar-btn"
-						:title="isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'"
-						@click="toggleFullscreen"
-					>
-						<svg
-							v-if="!isFullscreen"
-							viewBox="0 0 24 24"
-						>
-							<path
-								d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"
-							/>
-						</svg>
-						<svg
-							v-else
-							viewBox="0 0 24 24"
-						>
-							<path
-								d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"
-							/>
-						</svg>
+					<button class="toolbar-btn" :title="isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'" @click="toggleFullscreen">
+						<svg v-if="!isFullscreen" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+						<svg v-else viewBox="0 0 24 24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
 					</button>
 				</div>
 			</template>
@@ -439,6 +209,41 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Video Embed Dialog -->
+		<div
+			v-if="showVideoEmbedDialog"
+			class="bolt-rte-dialog-overlay"
+			@click.self="showVideoEmbedDialog = false"
+		>
+			<div class="bolt-rte-dialog">
+				<h3>Embed Video</h3>
+				<p style="font-size: 12px; margin-bottom: 8px; opacity: 0.7;">Paste YouTube, Vimeo or Direct Video URL</p>
+				<input
+					v-model="videoEmbedUrl"
+					type="url"
+					placeholder="https://www.youtube.com/watch?v=..."
+					class="bolt-rte-dialog-input"
+					@keydown.enter="confirmVideoEmbed"
+					@keydown.esc="showVideoEmbedDialog = false"
+					ref="videoEmbedInputRef"
+				/>
+				<div class="bolt-rte-dialog-actions">
+					<button
+						class="dialog-btn cancel"
+						@click="showVideoEmbedDialog = false"
+					>
+						Cancel
+					</button>
+					<button
+						class="dialog-btn confirm"
+						@click="confirmVideoEmbed"
+					>
+						Embed
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -455,6 +260,67 @@ import { TableCell } from "@tiptap/extension-table-cell";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { Underline } from "@tiptap/extension-underline";
 import { Placeholder } from "@tiptap/extension-placeholder";
+import { Node, mergeAttributes } from "@tiptap/core";
+
+// ─── Custom Video Extension ──────────────────────────────────────
+const VideoNode = Node.create({
+	name: "video",
+	group: "block",
+	selectable: true,
+	draggable: true,
+	atom: true,
+
+	addAttributes() {
+		return {
+			src: { default: null },
+			controls: { default: true },
+			width: { default: "100%" },
+		};
+	},
+
+	parseHTML() {
+		return [{ tag: "video" }];
+	},
+
+	renderHTML({ HTMLAttributes }) {
+		return ["video", mergeAttributes(HTMLAttributes, { style: "max-width: 100%; border-radius: 8px;" })];
+	},
+
+	addCommands() {
+		return {
+			setVideo: (options) => ({ commands }) => {
+				return commands.insertContent({
+					type: this.name,
+					attrs: options,
+				});
+			},
+		};
+	},
+});
+
+// ─── Custom Iframe Extension ──────────────────────────────────────
+const IframeNode = Node.create({
+	name: "iframe",
+	group: "block",
+	selectable: true,
+	draggable: true,
+	atom: true,
+	addAttributes() {
+		return {
+			src: { default: null },
+			width: { default: "100%" },
+			height: { default: 400 },
+			frameborder: { default: 0 },
+			allowfullscreen: { default: true },
+		};
+	},
+	parseHTML() {
+		return [{ tag: "iframe" }];
+	},
+	renderHTML({ HTMLAttributes }) {
+		return ["iframe", mergeAttributes(HTMLAttributes, { style: "max-width: 100%; border-radius: 8px;" })];
+	},
+});
 
 export default {
 	components: { EditorContent },
@@ -480,18 +346,17 @@ export default {
 
 		// Trả về true nếu feature được bật (hoặc toolbar chưa cấu hình)
 		const hasFeature = (key) => {
-			if (
-				!props.toolbar ||
-				!Array.isArray(props.toolbar) ||
-				props.toolbar.length === 0
-			)
-				return true;
+			if (!props.toolbar || !Array.isArray(props.toolbar) || props.toolbar.length === 0) return true;
 			return props.toolbar.includes(key);
 		};
 		const fileInputRef = ref(null);
 		const showLinkDialog = ref(false);
 		const linkUrl = ref("");
 		const linkInputRef = ref(null);
+
+		const showVideoEmbedDialog = ref(false);
+		const videoEmbedUrl = ref("");
+		const videoEmbedInputRef = ref(null);
 
 		// ─── Helper: upload files to Directus ─────────────────────────────
 		const uploadFiles = async (files) => {
@@ -534,6 +399,12 @@ export default {
 							`<img src="${url}" alt="${file.name}" style="max-width:100%;height:auto;" />`,
 						)
 						.run();
+				} else if (file.type.startsWith("video/")) {
+					editor.value
+						.chain()
+						.focus("end")
+						.setVideo({ src: url })
+						.run();
 				} else {
 					editor.value
 						.chain()
@@ -552,6 +423,8 @@ export default {
 			extensions: [
 				StarterKit,
 				Underline,
+				VideoNode,
+				IframeNode,
 
 				TextAlign.configure({ types: ["heading", "paragraph"] }),
 				Link.configure({
@@ -631,7 +504,45 @@ export default {
 		};
 
 		const triggerImageUpload = () => {
-			fileInputRef.value?.click();
+			if (fileInputRef.value) {
+				fileInputRef.value.accept = "image/*";
+				fileInputRef.value?.click();
+			}
+		};
+
+		const triggerVideoUpload = () => {
+			if (fileInputRef.value) {
+				fileInputRef.value.accept = "video/*";
+				fileInputRef.value?.click();
+			}
+		};
+
+		const insertVideoEmbed = () => {
+			videoEmbedUrl.value = "";
+			showVideoEmbedDialog.value = true;
+			nextTick(() => videoEmbedInputRef.value?.focus());
+		};
+
+		const confirmVideoEmbed = () => {
+			if (videoEmbedUrl.value) {
+				// Handle YouTube URLs specially if it looks like YouTube
+				let url = videoEmbedUrl.value;
+				if (url.includes("youtube.com") || url.includes("youtu.be")) {
+					// We'll just use an iframe for simplicity if we don't have the YouTube extension
+					// But for now, let's use the generic video node if it's a direct link, 
+					// or we'll need an Iframe extension for YouTube.
+					// Let's implement Video node to handle arbitrary video tags or simply use an embed code logic.
+					editor.value
+						.chain()
+						.focus()
+						.insertContent(`<iframe src="${url.replace("watch?v=", "embed/")}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>`)
+						.run();
+				} else {
+					editor.value.chain().focus().setVideo({ src: url }).run();
+				}
+			}
+			showVideoEmbedDialog.value = false;
+			videoEmbedUrl.value = "";
 		};
 
 		const handleFileInputChange = (e) => {
@@ -659,11 +570,17 @@ export default {
 			showLinkDialog,
 			linkUrl,
 			linkInputRef,
+			showVideoEmbedDialog,
+			videoEmbedUrl,
+			videoEmbedInputRef,
 			setHeading,
 			insertLink,
 			confirmLink,
 			insertTable,
 			triggerImageUpload,
+			triggerVideoUpload,
+			insertVideoEmbed,
+			confirmVideoEmbed,
 			handleFileInputChange,
 			handleDrop,
 		};
@@ -683,9 +600,7 @@ export default {
 	);
 	color: var(--theme--form--field--input--foreground, var(--foreground-normal));
 	font-family: var(--theme--fonts--sans--font-family, var(--font-sans));
-	transition:
-		border-color 0.2s ease,
-		box-shadow 0.2s ease;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -895,6 +810,21 @@ export default {
 		color-mix(in srgb, var(--theme--primary, var(--primary)) 40%, transparent);
 	outline-offset: 2px;
 	border-radius: var(--theme--border-radius, 4px);
+}
+
+.bolt-rte-content .tiptap video,
+.bolt-rte-content .tiptap iframe {
+	max-width: 100%;
+	border-radius: var(--theme--border-radius, 8px);
+	display: block;
+	margin: 1em 0;
+}
+
+.bolt-rte-content .tiptap video.ProseMirror-selectednode,
+.bolt-rte-content .tiptap iframe.ProseMirror-selectednode {
+	outline: 2px solid
+		color-mix(in srgb, var(--theme--primary, var(--primary)) 40%, transparent);
+	outline-offset: 2px;
 }
 
 .bolt-rte-content .tiptap hr {

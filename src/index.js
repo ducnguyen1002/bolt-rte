@@ -13,7 +13,7 @@ const ALL_FEATURES = [
 export default {
 	id: 'bolt-rte',
 	name: 'Bolt RTE',
-	icon: 'wysiwyg',
+	icon: "text_fields",
 	description: 'Professional rich text editor with multi-file drag-and-drop support and automatic upload to Directus.',
 	component: InterfaceComponent,
 	group: 'standard',
