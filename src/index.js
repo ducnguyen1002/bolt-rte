@@ -1,7 +1,7 @@
 import InterfaceComponent from './interface.vue';
 
 const ALL_FEATURES = [
-	'history', 'headings',
+	'history', 'headings', 'font_size',
 	'bold', 'italic', 'underline', 'strike',
 	'align',
 	'bulletList', 'orderedList', 'blockquote', 'codeBlock',
@@ -30,6 +30,7 @@ export default {
 					choices: [
 						{ text: 'Undo / Redo', value: 'history' },
 						{ text: 'Headings (H1–H6)', value: 'headings' },
+						{ text: 'Font Size', value: 'fontsize' },
 						{ text: 'Bold', value: 'bold' },
 						{ text: 'Italic', value: 'italic' },
 						{ text: 'Underline', value: 'underline' },

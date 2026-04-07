@@ -98,6 +98,43 @@
 				<div class="toolbar-divider"></div>
 			</template>
 
+			<!-- Font Size -->
+			<template v-if="hasFeature('font_size')">
+				<div class="toolbar-group">
+					<button
+						class="toolbar-btn"
+						title="Decrease Font Size"
+						@click="changeFontSize(-1)"
+						:disabled="isSourceView"
+					>
+						<svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z" /></svg>
+					</button>
+					<div
+						class="font-size-indicator"
+						style="
+							font-size: 11px;
+							min-width: 30px;
+							text-align: center;
+							font-weight: bold;
+							opacity: 0.7;
+						"
+					>
+						{{ currentFontSize.replace("px", "") }}
+					</div>
+					<button
+						class="toolbar-btn"
+						title="Increase Font Size"
+						@click="changeFontSize(1)"
+						:disabled="isSourceView"
+					>
+						<svg viewBox="0 0 24 24">
+							<path d="M19 13h-6V7h-2v6H5v2h6v6h2v-6h6z" />
+						</svg>
+					</button>
+				</div>
+				<div class="toolbar-divider"></div>
+			</template>
+
 			<!-- Basic Marks -->
 			<template
 				v-if="
@@ -813,6 +850,25 @@ const CustomTableCell = TableCell.extend({
 	},
 });
 
+// ─── Custom Text Style Extension (Font Size) ────────────────────
+const FontSize = TextStyle.extend({
+	addAttributes() {
+		return {
+			...this.parent?.(),
+			fontSize: {
+				default: null,
+				parseHTML: (element) => element.style.fontSize.replace(/['"]+/g, ""),
+				renderHTML: (attributes) => {
+					if (!attributes.fontSize) return {};
+					return {
+						style: `font-size: ${attributes.fontSize}`,
+					};
+				},
+			},
+		};
+	},
+});
+
 const CustomTableHeader = TableHeader.extend({
 	addAttributes() {
 		return {
@@ -966,6 +1022,7 @@ export default {
 				Underline,
 				VideoNode,
 				IframeNode,
+				FontSize,
 				TextStyle,
 				Color,
 				Highlight.configure({ multicolor: true }),
@@ -1187,6 +1244,22 @@ export default {
 			isFullscreen.value = !isFullscreen.value;
 		};
 
+		const currentFontSize = computed(() => {
+			if (!editor.value) return "16px";
+			return editor.value.getAttributes("textStyle").fontSize || "16px";
+		});
+
+		const changeFontSize = (delta) => {
+			const current = parseInt(currentFontSize.value);
+			const newSize = current + delta;
+			if (newSize < 8 || newSize > 100) return;
+			editor.value
+				.chain()
+				.focus()
+				.setMark("textStyle", { fontSize: `${newSize}px` })
+				.run();
+		};
+
 		const toggleSourceView = () => {
 			if (isSourceView.value) {
 				editor.value.commands.setContent(htmlSource.value, true);
@@ -1241,6 +1314,8 @@ export default {
 			htmlSource,
 			toggleSourceView,
 			updateFromSource,
+			currentFontSize,
+			changeFontSize,
 		};
 	},
 };
