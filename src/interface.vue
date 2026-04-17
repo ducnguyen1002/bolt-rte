@@ -285,6 +285,19 @@
 							/>
 						</svg>
 					</button>
+					<button
+						class="toolbar-btn"
+						:class="{ active: editor.isActive({ textAlign: 'justify' }) }"
+						title="Align Justify"
+						@click="editor.chain().focus().setTextAlign('justify').run()"
+						:disabled="isSourceView"
+					>
+						<svg viewBox="0 0 24 24">
+							<path
+								d="M3 21h18v-2H3v2zm0-4h18v-2H3v2zm0-4h18v-2H3v2zm0-4h18V7H3v2zm0-6v2h18V3H3z"
+							/>
+						</svg>
+					</button>
 				</div>
 				<div class="toolbar-divider"></div>
 			</template>
@@ -1060,7 +1073,7 @@ export default {
 			if (!files || files.length === 0) return;
 			const fileList = Array.from(files);
 
-			// Upload tất cả files song song để nhanh hơn
+			// Upload tất cả files
 			const results = await Promise.all(
 				fileList.map(async (file) => {
 					const formData = new FormData();
@@ -1070,7 +1083,6 @@ export default {
 							headers: { "Content-Type": "multipart/form-data" },
 						});
 						const fileId = response.data.data.id;
-						// api.defaults.baseURL là URL gốc của Directus (đã đúng trên cả local lẫn production subpath)
 						const rawBase = api.defaults.baseURL || "";
 						const baseUrl = rawBase.endsWith("/")
 							? rawBase.slice(0, -1)
@@ -1083,30 +1095,23 @@ export default {
 				}),
 			);
 
-			// Insert tuần tự để đảm bảo thứ tự và không ghi đè nhau
+			// Xử lý và gom tất cả nội dung vào một khối HTML để insert một lần duy nhất
+			let combinedHTML = "";
 			for (const result of results) {
 				if (!result) continue;
 				const { url, file } = result;
+
 				if (file.type.startsWith("image/")) {
-					// insertContent + moveToEnd tránh setImage ghi đè node cũ
-					editor.value
-						.chain()
-						.focus("end")
-						.insertContent(
-							`<img src="${url}" alt="${file.name}" style="max-width:100%;height:auto;" />`,
-						)
-						.run();
+					combinedHTML += `<img src="${url}" alt="${file.name}" style="max-width:100%;height:auto;" />`;
 				} else if (file.type.startsWith("video/")) {
-					editor.value.chain().focus("end").setVideo({ src: url }).run();
+					combinedHTML += `<video src="${url}" controls style="max-width: 100%; border-radius: 8px;"></video>`;
 				} else {
-					editor.value
-						.chain()
-						.focus("end")
-						.insertContent(
-							`<a href="${url}" target="_blank" rel="noopener">${file.name}</a>`,
-						)
-						.run();
+					combinedHTML += `<p><a href="${url}" target="_blank" rel="noopener">${file.name}</a></p>`;
 				}
+			}
+
+			if (combinedHTML) {
+				editor.value.chain().focus("end").insertContent(combinedHTML).run();
 			}
 		};
 
